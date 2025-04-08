@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://jokko.no',
 	integrations: [mdx(), sitemap()],
 	server: { port: 3000, host: "0.0.0.0" },
 });
