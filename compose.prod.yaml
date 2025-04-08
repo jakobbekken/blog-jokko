@@ -3,6 +3,5 @@ services:
     build:
       context: ./blog
       target: production
-    volumes:
-      - /app/dist
+    restart: on-failure
 

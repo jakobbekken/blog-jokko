@@ -15,5 +15,4 @@ CMD ["npm", "run", "dev"]
 
 FROM base AS production
 ENV NODE_ENV=production
-RUN astro build
-CMD ["npm", "run", "preview"]
+CMD ["npm", "run", "build"]
