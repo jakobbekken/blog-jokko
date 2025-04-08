@@ -1,0 +1,8 @@
+services:
+  blog:
+    build:
+      context: ./blog
+      target: production
+    volumes:
+      - /app/dist
+
