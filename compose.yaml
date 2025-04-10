@@ -9,6 +9,6 @@ services:
     volumes:
       - ./blog:/app
       - astro_node_modules:/app/node_modules
-
+      
 volumes:
   astro_node_modules:
