@@ -24,7 +24,7 @@ jobs:
 
             git pull origin main  || { echo "Git pull failed"; exit 1; }
 
-            docker-compose down -v || { echo "Failed to remove volumes"; exit 1; }
+            docker compose down -v || { echo "Failed to remove volumes"; exit 1; }
             
             docker compose -f compose.yaml -f compose.prod.yaml up --build -d || { echo "Docker compose failed starting"; exit 1; }
 
