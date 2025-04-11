@@ -85,8 +85,8 @@ body {
 	}
 
 	:not(pre) > code {
-		@apply opacity-75 bg-rosePine-surface rounded px-1.5 py-0.5;
-	}
+		@apply bg-rosePine-surface rounded px-1.5 py-0.5;
+	}	
 
 	pre:has(code) {
 		@apply bg-rosePine-surface rounded-lg px-6 py-4 text-wrap mb-4;
@@ -103,6 +103,15 @@ body {
 		@apply mb-8;
 	}
 } 
+
+.katex-display {
+	@apply bg-rosePine-surface rounded-lg px-6 py-4 text-wrap mb-4;
+}
+
+:not(.katex-display) > .katex {
+	@apply bg-rosePine-surface rounded px-1.5 py-0.5;
+	font-size: 1em;
+}
 
 .sr-only {
 	border: 0;
@@ -121,3 +130,4 @@ body {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
