@@ -19,11 +19,16 @@ const { frontmatter } = Astro.props;
 				<div class="hero-image">
 					{frontmatter.heroImage && <img class="rounded-xl mb-4" src={frontmatter.heroImage} alt="" />}
 				</div>
+				
 				<div class="mb-8">
 					<div class="title">
-						<div class="text-rosePine-foam mb-1">
-							<FormattedDate date={new Date(frontmatter.pubDate)} />
-						</div>
+						{
+							frontmatter.pubDate && (
+								<div class="text-rosePine-foam mb-1">
+									<FormattedDate date={new Date(frontmatter.pubDate)} />
+								</div>
+							)
+						}
 						<h1 class="text-rosePine-rose leading-none mb-8">{frontmatter.title}</h1>
 						<hr />
 					</div>
@@ -33,7 +38,7 @@ const { frontmatter } = Astro.props;
 					{
 						frontmatter.updatedDate && (
 							<span class="text-rosePine-pine text-xs">
-								Last updated <FormattedDate date={frontmatter.updatedDate} />
+								Last updated <FormattedDate date={new Date(frontmatter.updatedDate)} />
 							</span>
 						)
 					}
