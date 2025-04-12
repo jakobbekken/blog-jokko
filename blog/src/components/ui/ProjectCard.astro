@@ -1,10 +1,21 @@
 ---
-const { title, desc, link } = Astro.props;
+const { name, desc, link, tech } = Astro.props;
+const techList = tech ? tech.split(',').map(s => s.trim()) : [];
 ---
 
-<a href={link}>
-  <div>
-    <h3>{title}</h3>
+<a href={link} class="">
+  <div class="bg-rosePine-overlay px-4 py-2 rounded-xl">
+    <h3 class="text-rosePine-rose mb-2">{name}</h3>
+    <div class="">
+      <p class="text-rosePine-text mb-2">{desc}</p>
+        {techList && techList.length > 0 && (
+          <ul class="list-none text-rosePine-foam flex gap-3">
+            {techList.map((item) =>
+              <li class="m-0 p-0 text-sm">{item}</li>
+            )}
+          </ul>
+        )}
+    </div>
   </div>
-  <p>{desc}</p>
+  
 </a>

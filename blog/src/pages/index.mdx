@@ -1,6 +1,30 @@
 ---
 layout: ../layouts/Page.astro
 title: "My Lab"
-description: "Lorem ipsum dolor sit amet"
----
+description: ""
 
+---
+import ProjectCard from "../components/ui/ProjectCard.astro";
+
+## My stuff
+This page is still under construction, so there is a lot of unfished stuff. This what I am planning to have accessible here:
+
+- [Blog](/blog): Things that I write about.
+- [About Me](/about): Who I am and how to contact.
+- ~[Programs](/): Programs that I use.~
+- ~[Studies](/): Info from courses I have.~
+- ~[Decks](/): My MTG deck lists and guides.~
+
+ 
+
+## Projects
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<ProjectCard name="betauia/betauia.net" 
+             desc="The line association's website."
+             link="https://github.com/betauia/betauia.net" 
+             tech="Astro,Flask,Docker" />
+<ProjectCard name="jakobbekken/nixos-config" 
+             desc="Configs for my Nix machines." 
+             link="https://github.com/jakobbekken/nixos-config" 
+             tech="Nix" />
+</div>
