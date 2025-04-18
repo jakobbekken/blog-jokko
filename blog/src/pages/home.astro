@@ -17,7 +17,150 @@ const DESCRIPTION = "Welcome to my Home Page";
 	<body>
 		<Header />
 		<main class="max-w-4xl mx-auto px-4 my-8">
+
+			<div class="mb-4">
+				<ul id="engine">
+				</ul>
+				<form id="searchForm">
+					<input id="search-input" type="text" class="bg-rosePine-overlay" autocomplete="off" placeholder="Search...">
+				</form>	
+			</div>
+			<div id="links"></div>
 		</main>
 		<Footer />
+		<script>
+			const engines = [
+				{ name: "DuckDuckGo", url: "https://duckduckgo.com/?q=" },
+				{ name: "Google", url: "https://google.com/search?q=" },
+				{ name: "YouTube", url: "https://youtube.com/results?search_query=" },
+			];
+
+			let currentEngine = 0;
+			const engineList = document.getElementById("engine");
+			const searchInput = document.getElementById("search-input") as HTMLInputElement;
+			const form = "a";
+
+			const homeRow = new Set(["a", "s", "d", "f", "j", "k", "l", ";"]);
+			let keyBuffer: string[] = [];
+			const linkDiv = document.getElementById("links");
+
+			const links = {
+				s: {
+					title: "Studies",
+					links: {
+						j: { name: "Canvas", url: "https://uia.instructure.com/" },
+						k: { name: "Teams", url: "https://teams.microsoft.com/v2/" },
+						l: { name: "Printer", url: "https://uiaprint.uia.no/" },
+					}
+				},
+				d: {
+					title: "Work",
+					links: {
+						j: { name: "GitHub", url: "https://github.com/" },
+						k: { name: "LinkedIn", url: "https://linkedin.com/" },
+					}
+				},
+			};
+
+			if (engineList && searchInput && form && linkDiv) {
+
+				const liElements = engines.map((engine, index) => {
+					const li = document.createElement("li");
+					li.textContent = engine.name;
+					li.className = "border border-hidden";
+					if (index === currentEngine) {
+						li.classList.remove("border-hidden");
+					}
+					li.dataset.index = index.toString();
+					engineList.appendChild(li);
+					return li;
+				});
+
+				for (const [prefixKey, category] of Object.entries(links)) {
+					const categoryDiv = document.createElement("div");
+					const title = document.createElement("h2");
+					title.textContent = `[${prefixKey}] ${category.title}`;
+					categoryDiv.appendChild(title);
+
+					const ul = document.createElement("ul");
+					
+					for (const [key, linkObj] of Object.entries(category.links)) {
+						const li = document.createElement("li");
+
+						const a = document.createElement("a");
+
+						a.href = linkObj.url;
+						a.textContent = `[${key}] ${linkObj.name}`;
+						li.append(a);
+						ul.append(li);
+					}
+					categoryDiv.appendChild(ul);
+					linkDiv.append(categoryDiv);
+
+				}
+
+				const updateList = () => {
+					liElements.forEach((li, index) => {
+						if (index === currentEngine) {
+							li.classList.remove("border-hidden");
+						} else {
+							li.classList.add("border-hidden");
+						}
+					});
+				};
+				
+				document.addEventListener("keydown", (e) => {
+					if (!homeRow.has(e.key)) {
+						keyBuffer = [];
+					}
+
+					if (e.key === "Tab") {
+						if (e.shiftKey) {
+							currentEngine = (currentEngine - 1 + engines.length) % engines.length;
+						} else {
+							currentEngine = (currentEngine + 1) % engines.length;
+						}
+						e.preventDefault();
+						updateList();
+					}
+					
+					if (e.key === "Escape") {
+						e.preventDefault();
+						(document.activeElement as HTMLElement)?.blur?.();
+						keyBuffer = [];
+					}
+					
+					if (e.target instanceof HTMLElement && e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+						if (e.key === "i") {
+							e.preventDefault();
+							searchInput.focus();
+						}
+						
+						if (e.key === "c") {
+							e.preventDefault();
+							searchInput.value = "";
+							searchInput.focus();
+						}
+						
+						if (homeRow.has(e.key)) {
+							keyBuffer.push(e.key);
+							if (keyBuffer.length >= 2) {
+								const [fst, snd] = keyBuffer;
+								if (links[fst] && links[fst].links[snd]) {
+									const target = links[fst].links[snd];
+									window.open(target.url, "_blank");
+								}
+
+								keyBuffer = [];
+							} else {
+								if (!links[e.key]) {
+									keyBuffer = [];
+								}
+							}
+						}
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
