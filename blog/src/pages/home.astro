@@ -17,7 +17,7 @@ const DESCRIPTION = "Welcome to my Home Page";
 	<body>
 		<div class="min-h-screen flex flex-col">
 			<Header />
-			<main class="max-w-4xl w-full mx-auto px-4 flex flex-col justify-around flex-1">
+			<main class="max-w-4xl w-full mx-auto px-4 flex flex-col justify-around flex-1 mb-4">
 				<div class="text-center">
 					<h1 class="mb-0 leading-none">My Homepage</h1>
 					<p id="last-command" class="text-rosePine-subtle font-mono">[]</p>
@@ -26,9 +26,9 @@ const DESCRIPTION = "Welcome to my Home Page";
 					<form id="search-form" class="mb-4">
 						<input id="search-input" type="text" class="bg-rosePine-overlay w-full text-lg px-4 py-2 rounded-xl focus:ring-4 focus:ring-rosePine-iris outline-none" autocomplete="off" placeholder="Search...">
 					</form>	
-					<ul id="engine" class="flex justify-around list-none mb-16"></ul>
+					<ul id="engine" class="flex justify-around list-none mb-16 flex-wrap"></ul>
 				</div>
-				<div id="links" class="flex justify-between gap-4"></div>
+				<div id="links" class="flex flex-wrap justify-between gap-4"></div>
 			</main>
 		</div>
 		<Footer />
@@ -82,7 +82,7 @@ const DESCRIPTION = "Welcome to my Home Page";
 				const liElements = engines.map((engine, index) => {
 					const li = document.createElement("li");
 					li.textContent = engine.name;
-					li.className = "border-b-4 border-rosePine-pine border-hidden p-0 m-0";
+					li.className = "border-b-4 border-rosePine-pine border-hidden p-0 m-0 mb-2";
 					if (index === currentEngine) {
 						li.classList.remove("border-hidden", "text-rosePine-base");
 						li.classList.add("text-rosePine-rose")
