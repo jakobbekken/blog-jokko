@@ -1,7 +1,0 @@
-services:
-  blog:
-    build:
-      context: ./blog
-      target: production
-    restart: on-failure
-
