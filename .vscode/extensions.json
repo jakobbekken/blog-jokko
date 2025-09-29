@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "seatonjiang.gitmoji-vscode",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "astro-build.astro-vscode",
+    "unifiedjs.vscode-mdx",
+    "bradlc.vscode-tailwindcss",
+    "bbenoist.Nix",
+    "svelte.svelte-vscode"
+  ]
+}
