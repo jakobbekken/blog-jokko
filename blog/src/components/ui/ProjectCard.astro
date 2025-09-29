@@ -1,21 +1,28 @@
 ---
-const { name, desc, link, tech } = Astro.props;
-const techList = tech ? tech.split(',').map(s => s.trim()) : [];
+export interface Props {
+  name: string;
+  desc: string;
+  link: string;
+  tech: string[];
+}
+
+const { name, desc, link, tech = [] } = Astro.props;
 ---
 
-<a href={link} class="">
-  <div class="bg-rosePine-overlay px-4 py-2 rounded-xl">
-    <h3 class="text-rosePine-rose mb-2">{name}</h3>
-    <div class="">
-      <p class="text-rosePine-text mb-2">{desc}</p>
-        {techList && techList.length > 0 && (
-          <ul class="list-none text-rosePine-foam flex gap-3">
-            {techList.map((item) =>
+<a href={link}>
+  <div class="rounded-xl bg-rosePine-overlay px-4 py-2">
+    <h3 class="mb-2 text-rosePine-rose">{name}</h3>
+    <div>
+      <p class="mb-2 text-rosePine-text">{desc}</p>
+      {
+        tech.length > 0 && (
+          <ul class="flex list-none gap-3 text-rosePine-foam">
+            {tech.map(item => (
               <li class="m-0 p-0 text-sm">{item}</li>
-            )}
+            ))}
           </ul>
-        )}
+        )
+      }
     </div>
   </div>
-  
 </a>

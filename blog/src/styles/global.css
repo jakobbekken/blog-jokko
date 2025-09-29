@@ -5,21 +5,21 @@
  */
 
 @font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 body {
-	font-family: 'Atkinson', sans-serif;
+  font-family: "Atkinson", sans-serif;
 }
 
 @tailwind base;
@@ -27,107 +27,115 @@ body {
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-rosePine-base text-rosePine-text;
+  }
 
-	body {
-		@apply bg-rosePine-base text-rosePine-text;
-	}
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
+  }
+  h6 {
+    @apply text-base;
+  }
 
-	h1 {
-		@apply text-4xl;
-	}
-	h2 {
-		@apply text-3xl;
-	}
-	h3 {
-		@apply text-2xl;
-	}
-	h4 {
-		@apply text-xl;
-	}
-	h5 {
-		@apply text-lg;
-	}
-	h6 {
-		@apply text-base;
-	}
-	
-	h1, h2, h3, h4, h5, h6 {
-		@apply leading-normal font-bold mb-4;
-	}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mb-4 font-bold leading-normal;
+  }
 
-	p {
-		@apply text-base mb-4;
-	}
+  p {
+    @apply mb-4 text-base;
+  }
 
-	a {
-		@apply text-rosePine-iris hover:opacity-75 font-bold;
-	}
+  a {
+    @apply font-bold text-rosePine-iris hover:opacity-75;
+  }
 
-	:not(li) > ul, :not(li) > ol {
-		@apply mb-4;
-	}
+  :not(li) > ul,
+  :not(li) > ol {
+    @apply mb-4;
+  }
 
-	ul {
-		@apply list-[square] marker:text-rosePine-foam marker:text-base;
-	}
+  ul {
+    @apply list-[square] marker:text-base marker:text-rosePine-foam;
+  }
 
-	ol {
-		@apply list-decimal marker:text-rosePine-foam marker:font-bold;
-	}
+  ol {
+    @apply list-decimal marker:font-bold marker:text-rosePine-foam;
+  }
 
-	li {
-		@apply text-base pl-1 ml-6;
-	}
+  li {
+    @apply ml-6 pl-1 text-base;
+  }
 
+  p > img {
+    @apply rounded-xl;
+  }
 
-	p > img {
-		@apply rounded-xl;
-	}
+  :not(pre) > code {
+    @apply rounded bg-rosePine-surface px-1.5 py-0.5;
+  }
 
-	:not(pre) > code {
-		@apply bg-rosePine-surface rounded px-1.5 py-0.5;
-	}	
+  pre:has(code) {
+    @apply mb-4 text-wrap rounded-lg bg-rosePine-surface px-6 py-4;
+  }
 
-	pre:has(code) {
-		@apply bg-rosePine-surface rounded-lg px-6 py-4 text-wrap mb-4;
-	}
+  :not(footer) > hr {
+    @apply mb-4 h-[10px] border-none;
 
-	:not(footer) > hr {
-		@apply mb-4 border-none h-[10px];
+    /* Taken from: https://astro-blog-template.netlify.app/blog/ */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20' height='10' viewBox='0 0 20 10' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd' stroke-miterlimit='10'%3e%3cpath fill='none' d='M0 0h20v10H0z'/%3e%3cclipPath id='a'%3e%3cpath d='M0 0h20v10H0z'/%3e%3c/clipPath%3e%3cg clip-path='url(%23a)'%3e%3cpath d='M20 7.384c-4.999-.001-5-4.768-9.999-4.768C5 2.616 5 7.384 0 7.384' fill='none' stroke-width='3' stroke='%2331748f'/%3e%3c/g%3e%3c/svg%3e");
+  }
 
-		/* Taken from: https://astro-blog-template.netlify.app/blog/ */
-		background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20' height='10' viewBox='0 0 20 10' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd' stroke-miterlimit='10'%3e%3cpath fill='none' d='M0 0h20v10H0z'/%3e%3cclipPath id='a'%3e%3cpath d='M0 0h20v10H0z'/%3e%3c/clipPath%3e%3cg clip-path='url(%23a)'%3e%3cpath d='M20 7.384c-4.999-.001-5-4.768-9.999-4.768C5 2.616 5 7.384 0 7.384' fill='none' stroke-width='3' stroke='%2331748f'/%3e%3c/g%3e%3c/svg%3e");
-	}
-
-	h1 + hr, h2 + hr, h3 + hr, h4 + hr, h5 + hr, h6 + hr {
-		@apply mb-8;
-	}
-} 
+  h1 + hr,
+  h2 + hr,
+  h3 + hr,
+  h4 + hr,
+  h5 + hr,
+  h6 + hr {
+    @apply mb-8;
+  }
+}
 
 .katex-display {
-	@apply bg-rosePine-surface rounded-lg px-6 py-4 text-wrap mb-4;
+  @apply mb-4 text-wrap rounded-lg bg-rosePine-surface px-6 py-4;
 }
 
 :not(.katex-display) > .katex {
-	@apply bg-rosePine-surface rounded px-1.5 py-0.5;
-	font-size: 1em;
+  @apply rounded bg-rosePine-surface px-1.5 py-0.5;
+  font-size: 1em;
 }
 
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+  clip: rect(1px 1px 1px 1px);
+  /* maybe deprecated but we need to support legacy browsers */
+  clip: rect(1px, 1px, 1px, 1px);
+  /* modern browsers, clip-path works inwards from each corner */
+  clip-path: inset(50%);
+  /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+  white-space: nowrap;
 }
-

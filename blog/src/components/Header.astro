@@ -1,16 +1,28 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+import HeaderLink from "@components/HeaderLink.astro";
+import Logo from "@assets/logos/logo.svg";
 ---
 
 <header class="px-4">
-	<nav class="flex items-center justify-between h-16">
-		<div class="text-lg"><a class="text-rosePine-text py-4 px-2 flex items-center gap-2" href="/"><img src="/logos/logo.svg" alt="Logo" class="h-6"><span>Jokko</span></a></div>
-		<div class="internal-links flex">
-			<HeaderLink href="/" class="text-rosePine-text py-4 px-2 border-b-4 border-hidden">Home</HeaderLink>
-			<HeaderLink href="/blog" class="text-rosePine-text py-4 px-2 border-b-4 border-hidden">Blog</HeaderLink>
-			<HeaderLink href="/tech" class="text-rosePine-text py-4 px-2 border-b-4 border-hidden">Tech</HeaderLink>
-			<HeaderLink href="/about" class="text-rosePine-text py-4 px-2 border-b-4 border-hidden">About</HeaderLink>
-		</div>
-	</nav>
+  <nav class="flex h-16 items-center justify-between">
+    <div class="text-lg">
+      <a class="flex items-center gap-2 px-2 py-4 text-rosePine-text" href="/"
+        ><Logo class="h-6 w-6 shrink-0" /><span>Jokko</span></a
+      >
+    </div>
+    <div class="internal-links flex">
+      <HeaderLink href="/" class="border-b-4 border-hidden px-2 py-4 text-rosePine-text"
+        >Home</HeaderLink
+      >
+      <HeaderLink href="/blog" class="border-b-4 border-hidden px-2 py-4 text-rosePine-text"
+        >Blog</HeaderLink
+      >
+      <HeaderLink href="/tech" class="border-b-4 border-hidden px-2 py-4 text-rosePine-text"
+        >Tech</HeaderLink
+      >
+      <HeaderLink href="/about" class="border-b-4 border-hidden px-2 py-4 text-rosePine-text"
+        >About</HeaderLink
+      >
+    </div>
+  </nav>
 </header>
-

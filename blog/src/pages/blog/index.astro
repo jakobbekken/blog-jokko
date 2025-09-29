@@ -1,46 +1,45 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import BaseHead from "@components/BaseHead.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@src/consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "@components/FormattedDate.astro";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title="My Blog" description="Welcome to my blog!" />
-		<style>
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main class="max-w-4xl mx-auto px-4 my-8">
-			<section>
-				<h1 class="leading-none text-rosePine-rose">Blog</h1>
-				<ul class="space-y-8">
-					{
-						posts.map((post, index) => (
-							<li class="list-none mx-0 px-0">
-								<a class="display-block" href={`/blog/${post.id}/`}>
-									<h2 class="mb-0 text-rosePine-rose">{post.data.title}</h4>
-									<p class="text-rosePine-text mb-0 pb-2">{post.data.description}</p>
-									<p class="text-rosePine-foam mb-0">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-								{index < posts.length - 1 && <hr class="mt-8">}
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title="My Blog" description="Welcome to my blog!" />
+    <style></style>
+  </head>
+  <body>
+    <Header />
+    <main class="mx-auto my-8 max-w-4xl px-4">
+      <section>
+        <h1 class="leading-none text-rosePine-rose">Blog</h1>
+        <ul class="space-y-8">
+          {
+            posts.map((post, index) => (
+              <li class="mx-0 list-none px-0">
+                <a class="display-block" href={`/blog/${post.id}/`}>
+                  <h2 class="mb-0 text-rosePine-rose">{post.data.title}</h2>
+                  <p class="mb-0 pb-2 text-rosePine-text">{post.data.description}</p>
+                  <p class="mb-0 text-rosePine-foam">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </a>
+                {index < posts.length - 1 && <hr class="mt-8" />}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
