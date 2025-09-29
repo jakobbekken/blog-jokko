@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import svelte from "@astrojs/svelte";
 
 import fs from "fs";
 
@@ -15,7 +16,7 @@ const rosePineCustom = JSON.parse(
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://jokko.no',
-	integrations: [mdx(), sitemap(), tailwind()],
+	integrations: [mdx(), sitemap(), tailwind(), svelte()],
 	server: { port: 3000, host: "0.0.0.0" },
 	markdown: {
 		remarkPlugins: [remarkMath],
