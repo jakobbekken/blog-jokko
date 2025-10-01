@@ -23,7 +23,8 @@
     context.setFont("Arial", 10);
 
     const stave = new Stave(padding, 40, containerWidth - 2*padding);
-    stave.addClef(clef).addTimeSignature(timeSignature);
+    stave.addClef(clef)
+    stave.addTimeSignature(timeSignature);
     stave.setContext(context).draw();
 
     const staveNotes = parseNotes(notes, clef)
@@ -31,7 +32,7 @@
     const voice = new Voice({ numBeats: 4, beatValue: 4 }).setStrict(false);
     voice.addTickables(staveNotes);
 
-    new Formatter().joinVoices([voice]).format([voice], 350);
+    new Formatter().joinVoices([voice]).format([voice], containerWidth);
     voice.draw(context, stave);
   });
 </script>
