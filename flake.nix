@@ -7,20 +7,25 @@
 
   outputs = { self, nixpkgs }:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-    in
-    {
-      devShells.${system}.default = pkgs.mkShell {
-        packages = [
-          pkgs.nodejs_22
-        ];
+      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
+      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system:
+        let pkgs = import nixpkgs { inherit system; };
+        in f pkgs system
+      );
+    in {
+      devShells = forAllSystems (pkgs: system: {
+        default = pkgs.mkShell {
+          packages = [
+            pkgs.nodejs_22
+          ];
 
-        shellHook = ''
-          echo "🚀 Hei sjef! Hva skal det være i dag?"
-          echo "Node version: $(node -v)"
-        '';
-      };
+          shellHook = ''
+            echo "🚀 Hei sjef! Hva skal det være i dag?"
+            echo "System: ${system}"
+            echo "Node version: $(node -v)"
+          '';
+        };
+      });
     };
 }
 
