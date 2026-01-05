@@ -1,18 +1,24 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import "@src/styles/global.css";
+
+import "@fontsource/cormorant/400.css";
+import "@fontsource/cormorant/600.css";
+import "@fontsource/cormorant/400-italic.css";
+
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+
 import { SITE_TITLE } from "@src/consts";
 
 interface Props {
   title: string;
   description: string;
-  image?: string;
+  // image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-let { title, description, image = "/logos/hero.png" } = Astro.props;
+let { title, description} = Astro.props; // , image = "/logos/hero.png" 
 title = "Jokko | " + title;
 ---
 
@@ -45,11 +51,11 @@ title = "Jokko | " + title;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<!-- <meta property="og:image" content={new URL(image, Astro.url)} /> -->
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<!-- <meta property="twitter:image" content={new URL(image, Astro.url)} /> -->

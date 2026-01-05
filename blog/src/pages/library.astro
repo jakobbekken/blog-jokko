@@ -1,0 +1,105 @@
+---
+import Section from "@components/semantics/Section.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import { discography } from "@data/musicCollection";
+import type { Artist } from "@data/musicCollection";
+
+import Vinyl from "@components/ui/Vinyl.astro";
+import Prose from "@components/semantics/Prose.astro";
+import Container from "@components/semantics/Container.astro";
+
+const artists = [...discography].sort((a, b) => {
+  return a.name.localeCompare(b.name, undefined, {
+    sensitivity: "base",
+  });
+});
+
+const artistsByLetter = artists.reduce<Record<string, Artist[]>>((groups, artist) => {
+  const firstLetter = artist.name[0].toUpperCase();
+
+  if (!groups[firstLetter]) {
+    groups[firstLetter] = [];
+  }
+
+  groups[firstLetter].push(artist);
+
+  return groups;
+}, {});
+
+const letters = Object.keys(artistsByLetter).sort();
+---
+
+<BaseLayout title="Library">
+  <Container>
+    <Prose>
+      <h1>Music Library</h1>
+
+      <p>
+        Here is a list of all kinds of albums and songs I own either physically or digitally. I try
+        to listen to a wide range of genres and artists, so please recommend me some of your
+        favorites and let me have a listen!
+      </p>
+    </Prose>
+
+    <nav class="mt-10">
+      <ul class="flex flex-wrap gap-x-6 gap-y-3 font-display text-sm tracking-widest">
+        {
+          letters.map(letter => (
+            <li>
+              <a href={`#${letter}`} class="text-muted/50 transition hover:text-gold">
+                {letter}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </Container>
+
+  <Section>
+    <Container>
+      <div class="grid grid-cols-2 gap-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        {
+          letters.map(letter => (
+            <>
+              <div id={letter} class="col-span-full flex scroll-mt-24 items-center gap-4 pb-4 pt-2">
+                <div class="h-px w-6 bg-muted/30" />
+                <span class="font-display text-3xl text-gold opacity-80">{letter}</span>
+                <div class="h-px flex-1 bg-muted/30" />
+              </div>
+
+              {artistsByLetter[letter].map((artist: Artist) =>
+                artist.discography
+                  .sort((a, b) => b.year - a.year)
+                  .map(music => (
+                    <div class="group flex flex-col items-center gap-3">
+                      <Vinyl
+                        imageUrl={music.imageUrl}
+                        alt={`Cover for ${music.title}`}
+                        href={music.spotify}
+                      />
+
+                      <div class="flex w-full max-w-48 flex-col text-center">
+                        <div class="mt-2 font-display font-bold text-white">{music.title}</div>
+
+                        <div class="text-xxs text-muted">
+                          {artist.name}
+                          <span class="mx-1">·</span>
+                          <span class="tabular-nums">{music.year}</span>
+                        </div>
+
+                        <div class="mt-1 text-xxs uppercase tracking-wide text-muted">
+                          {music.type}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+              )}
+            </>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>

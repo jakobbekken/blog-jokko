@@ -1,0 +1,104 @@
+---
+const { class: className = "", variant = "default" } = Astro.props;
+---
+
+<div
+  class={`
+    max-w-none
+    prose
+
+    /* BASE TEXT */
+    text-text
+    prose-p:text-muted
+    prose-p:leading-relaxed
+    prose-strong:text-text
+    prose-em:text-muted
+
+    /* DECORATION */
+    prose-hr:border-muted/30
+
+    /* HEADINGS */
+    prose-headings:font-display
+    prose-headings:tracking-tight
+    prose-headings:text-text
+    prose-headings:mt-10
+    prose-headings:mb-4
+
+    prose-h1:text-4xl md:prose-h1:text-5xl
+    prose-h1:font-bold
+    prose-h1:text-gold
+
+    prose-h2:text-3xl md:prose-h2:text-4xl
+    prose-h2:font-semibold
+
+    prose-h3:text-2xl md:prose-h3:text-3xl
+    prose-h3:font-semibold
+
+    prose-h4:text-xl
+    prose-h5:text-lg
+    prose-h6:text-base
+    prose-h6:uppercase
+    prose-h6:tracking-wide
+    prose-h6:text-muted
+
+    /* LINKS */
+    prose-a:relative
+    prose-a:text-accent
+    prose-a:font-medium
+    prose-a:underline
+    prose-a:underline-offset-4
+
+    /* LISTS */
+    prose-ul:list-disc
+    prose-ol:list-decimal
+    prose-li:marker:text-muted
+
+    /* QUOTES */
+    prose-blockquote:border-l-accent/40
+    prose-blockquote:text-muted
+    prose-blockquote:italic
+
+    /* CODE */
+    prose-code:font-mono
+    prose-code:text-gold
+    prose-code:bg-surface
+    prose-code:px-1.5
+    prose-code:py-0.5
+    prose-code:rounded
+
+    prose-pre:bg-surface
+    prose-pre:text-text
+    prose-pre:rounded-lg
+    prose-pre:p-4
+
+    /* MEDIA */
+    prose-img:rounded-lg
+    prose-img:my-8
+
+    prose-figure:my-10
+    prose-figcaption:text-sm
+    prose-figcaption:text-muted
+    prose-figcaption:text-center
+
+    /* TABLES */
+    prose-table:my-8
+    prose-th:text-text
+    prose-td:text-muted
+
+    /* DEFINITION LISTS */
+    prose-dl:my-8
+    prose-dl:space-y-2
+
+    prose-dt:font-medium
+    prose-dt:text-text
+
+    prose-dd:ml-0
+    prose-dd:pb-4
+    prose-dd:pl-0
+    prose-dd:text-muted
+
+    ${className}
+  `}
+>
+  <slot />
+</div>

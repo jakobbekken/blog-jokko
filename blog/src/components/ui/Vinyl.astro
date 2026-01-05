@@ -1,0 +1,86 @@
+---
+import Image from "astro/components/Image.astro";
+
+const { imageUrl, alt = "Album cover", href = "" } = Astro.props;
+---
+
+<a href={href} class="inline-block" target="_blank">
+  <div
+    class="vinyl group relative aspect-[9/8] h-32 w-32 transition-[width] duration-200 ease-out"
+    style="
+    --disk: 90%;
+    --label: 32%;
+    --hole: 15%;
+    --peek: 1.5rem;
+    --reveal: 4.5rem;
+  "
+  >
+    <!-- Vinyl -->
+    <div
+      class="vinyl__disk absolute top-1/2 flex aspect-square -translate-y-1/2 items-center justify-center rounded-full border border-muted/50 bg-surface shadow-[0_8px_24px_rgba(0,0,0,0.5)] transition-[left] duration-200 ease-out"
+    >
+      <div
+        class="vinyl__label relative aspect-square overflow-hidden rounded-full ring-1 ring-muted/25"
+      >
+        <Image
+          src={imageUrl}
+          alt={alt}
+          width={300}
+          height={300}
+          aria-hidden="true"
+          class="vinyl__label-image"
+        />
+
+        <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div class="vinyl__hole rounded-full bg-bg ring-1 ring-muted/25"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sleeve -->
+    <div
+      class="absolute left-0 top-0 aspect-square h-full overflow-hidden rounded-sm shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+    >
+      <Image src={imageUrl} alt={alt} width={300} height={300} class="h-full w-full object-cover" />
+    </div>
+  </div>
+</a>
+
+<style>
+  .vinyl {
+    width: 8rem;
+    transition: width 200ms ease-out;
+  }
+
+  .vinyl:hover {
+    width: 11rem;
+  }
+  .vinyl__disk {
+    height: var(--disk);
+    top: calc((100% - var(--disk)) / 2);
+    left: 0;
+    transform: translateX(var(--peek));
+    transition: transform 200ms ease-out;
+  }
+
+  .vinyl:hover .vinyl__disk {
+    transform: translateX(var(--reveal));
+  }
+
+  .vinyl__label {
+    height: var(--label);
+  }
+
+  .vinyl__hole {
+    height: var(--hole);
+    width: var(--hole);
+  }
+
+  .vinyl__label-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform: scale(1.4);
+    filter: blur(8px) brightness(0.85);
+  }
+</style>

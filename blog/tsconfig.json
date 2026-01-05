@@ -8,6 +8,7 @@
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
       "@pages/*": ["src/pages/*"],
+      "@data/*": ["src/data/*"],
       "@src/*": ["src/*"]
     }
   }

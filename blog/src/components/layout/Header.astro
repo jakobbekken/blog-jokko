@@ -1,0 +1,17 @@
+---
+import HeaderLink from "@components/layout/HeaderLink.astro";
+---
+
+<header class="absolute w-full bg-surface">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
+    <div class="text-lg">
+      <a class="flex items-center py-4 font-display" href="/"
+        >Jokko<span class="text-gold">.</span></a
+      >
+    </div>
+    <div class="internal-links flex gap-4 text-muted">
+      <HeaderLink href="/library" class="border-b-4 border-hidden py-4">Library</HeaderLink>
+      <HeaderLink href="/about" class="border-b-4 border-hidden py-4">About</HeaderLink>
+    </div>
+  </nav>
+</header>

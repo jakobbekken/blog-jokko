@@ -9,8 +9,20 @@
   "extensions.ignoreRecommendations": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "prettier.documentSelectors": ["**/*.astro"],
+  "prettier.documentSelectors": [
+    "**/*.astro",
+    "**/*.svelte",
+    "**/*.js",
+    "**/*.ts",
+    "**/*.json",
+    "**/*.md",
+    "**/*.css",
+    "**/*.html"
+  ],
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
   }
 }

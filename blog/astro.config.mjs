@@ -7,10 +7,9 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import svelte from "@astrojs/svelte";
 
-import fs from "fs";
 import path from "path";
 
-const rosePineCustom = JSON.parse(fs.readFileSync("./src/themes/rose-pine.json", "utf-8"));
+// const rosePineCustom = JSON.parse(fs.readFileSync("./src/themes/rose-pine.json", "utf-8"));
 
 export default defineConfig({
   site: "https://jokko.no",
@@ -19,17 +18,20 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
-    shikiConfig: {
-      theme: rosePineCustom,
-    },
+    // shikiConfig: {
+    //   theme: rosePineCustom,
+    // },
   },
   vite: {
     resolve: {
       alias: {
         "@components": path.resolve("./src/components"),
+        "@assets": path.resolve("./src/assets"),
         "@layouts": path.resolve("./src/layouts"),
         "@pages": path.resolve("./src/pages"),
         "@lib": path.resolve("./src/lib"),
+        "@data": path.resolve("./src/data"),
+        "@src": path.resolve("./src"),
       },
     },
   },

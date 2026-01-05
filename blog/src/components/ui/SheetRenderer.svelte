@@ -1,42 +1,74 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { Renderer, Stave, StaveNote, Voice, Formatter, Accidental } from "vexflow";
+  import { onMount, onDestroy } from "svelte";
+  import { Renderer, Stave, Voice, Formatter } from "vexflow";
   import { parseNotes } from "@lib/music/noteParser";
-  
 
   export let notes: string[] = [];
-  export let clef = "bass";
+  export let clef: "treble" | "bass" = "treble";
   export let timeSignature = "4/4";
 
   let container: HTMLDivElement;
-  let containerWidth: number;
-  let padding = 1;
+  let containerWidth = 0;
+  let resizeObserver: ResizeObserver;
 
+  const padding = 10;
+  const height = 200;
+  const color = "#b8b3aa";
 
-  onMount(() => {
+  function getBeats(ts: string) {
+    const [beats, value] = ts.split("/").map(Number);
+    return { beats, value };
+  }
+
+  function render() {
+    if (!container || containerWidth === 0) return;
+
     container.innerHTML = "";
 
-
     const renderer = new Renderer(container, Renderer.Backends.SVG);
-    renderer.resize(containerWidth, 200);
+    renderer.resize(containerWidth, height);
+
     const context = renderer.getContext();
     context.setFont("Arial", 10);
+    context.setFillStyle(color);
+    context.setStrokeStyle(color);
 
-    const stave = new Stave(padding, 40, containerWidth - 2*padding);
-    stave.addClef(clef)
-    stave.addTimeSignature(timeSignature);
-    stave.setContext(context).draw();
+    const staveWidth = containerWidth - padding * 2;
 
-    const staveNotes = parseNotes(notes, clef)
+    const stave = new Stave(padding, 40, staveWidth);
+    stave.addClef(clef).addTimeSignature(timeSignature).setContext(context).draw();
 
-    const voice = new Voice({ numBeats: 4, beatValue: 4 }).setStrict(false);
-    voice.addTickables(staveNotes);
+    const staveNotes = parseNotes(notes, clef, color);
 
-    new Formatter().joinVoices([voice]).format([voice], containerWidth);
+    const { beats, value } = getBeats(timeSignature);
+
+    const voice = new Voice({
+      numBeats: beats,
+      beatValue: value,
+    })
+      .setStrict(false)
+      .addTickables(staveNotes);
+
+    new Formatter().joinVoices([voice]).format([voice], staveWidth - 20);
+
     voice.draw(context, stave);
+  }
+
+  onMount(() => {
+    resizeObserver = new ResizeObserver(([entry]) => {
+      const width = Math.floor(entry.contentRect.width);
+      if (width !== containerWidth) {
+        containerWidth = width;
+        render();
+      }
+    });
+
+    resizeObserver.observe(container);
+  });
+
+  onDestroy(() => {
+    resizeObserver?.disconnect();
   });
 </script>
 
-<div class="p-4 bg-white rounded-xl">
-<div class="" bind:clientWidth={containerWidth} bind:this={container}></div>
-</div>
+<div bind:this={container} class="w-full"></div>

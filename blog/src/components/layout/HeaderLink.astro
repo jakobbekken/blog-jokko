@@ -11,7 +11,7 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 
 <a
   href={href}
-  class:list={["block border-rosePine-pine text-center", className, { active: isActive }]}
+  class:list={["block text-center text-muted hover:text-text", className, { active: isActive }]}
   {...props}
 >
   <slot />
@@ -19,7 +19,6 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 
 <style>
   a.active {
-    border-bottom-style: solid;
-    @apply text-rosePine-rose;
+    @apply text-text;
   }
 </style>

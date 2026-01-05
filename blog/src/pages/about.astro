@@ -1,0 +1,47 @@
+---
+import Section from "@components/semantics/Section.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import Prose from "@components/semantics/Prose.astro";
+
+import Container from "@components/semantics/Container.astro";
+import RandomMusic from "@components/ui/RandomMusic.svelte";
+
+const birthDate = new Date(2004, 7, 20);
+const age =
+  new Date().getFullYear() -
+  birthDate.getFullYear() -
+  (new Date() < new Date(new Date().getFullYear(), 7, 20) ? 1 : 0);
+---
+
+<BaseLayout title="About">
+  <Section class="flex min-h-svh items-center">
+    <Container>
+      <Prose>
+        <h1>About</h1>
+
+        <p><em>Jakob Moen Bekken ({age}) · Norway</em><br/>
+        <a href="https://github.com/jakobbekken" target="_blank">GitHub</a> · <a href="https://www.linkedin.com/in/jakob-moen-bekken-52643927a/" target="_blank">LinkedIn</a> · <a href="mailto:contact@jokko.no" target="_blank">Email</a>
+        </p>
+
+        <hr />
+
+        <dl>
+          <dt>Context</dt>
+          <dd>Software, machine learning, and creative tools.</dd>
+
+          <dt>Education</dt>
+          <dd>M.Sc Artificial Intelligence, University of Agder <em>(current)</em></dd>
+
+          <dt>Activities</dt>
+          <dd>Student organizations, development, music, climbing.</dd>
+        </dl>
+
+        <hr />
+      </Prose>
+      <RandomMusic client:load />
+      <Prose>
+      </Prose>
+    </Container>
+  </Section>
+</BaseLayout>
